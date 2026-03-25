@@ -47,11 +47,20 @@ body::before {
 
 /* profile image */
 img {
-    width: 120px;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
     border-radius: 50%;
     border: 3px solid #00f0ff;
-    box-shadow: 0 0 25px #00f0ff;
+    box-shadow: 0 0 25px #00f0ff, 0 0 50px #00f0ff55;
     margin-bottom: 15px;
+    transition: 0.4s;
+}
+
+/* 🔥 hover effect */
+img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px #00f0ff;
 }
 
 /* name */
