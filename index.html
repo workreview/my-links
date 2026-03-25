@@ -1,43 +1,103 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>My Links</title>  
-<style>  
-body {  
-    font-family: Arial, sans-serif;  
-    background: #0f172a;  
-    color: white;  
-    text-align: center;  
-    padding: 40px;  
-}  
-.container {  
-    max-width: 400px;  
-    margin: auto;  
-}  
-h1 {  
-    margin-bottom: 20px;  
-}  
-.link {  
-    display: block;  
-    background: #1e293b;  
-    color: white;  
-    padding: 15px;  
-    margin: 10px 0;  
-    border-radius: 10px;  
-    text-decoration: none;  
-    transition: 0.3s;  
-}  
-.link:hover {  
-    background: #334155;  
-}  
-</style>  
-</head>  
-<body>  <div class="container">  
-    <h1>Follow Me 👇</h1>  <a class="link" href="https://www.tiktok.com/@mahmoud_ali_s?_r=1&_t=ZS-94yBMytcqQb" target="_blank">TikTok</a>  
-<a class="link" href="https://www.facebook.com/share/1XggwzXXHM/" target="_blank">Facebook</a>  
-<a class="link" href="https://www.instagram.com/70da_as?igsh=MWxvNm5mZG5mNDl2ZQ==" target="_blank">Instagram</a>  
-<a class="link" href="https://wa.me/201020201472" target="_blank">WhatsApp</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahmoud Ali | Gamer</title>
 
-</div>  </body>  
+<style>
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #020617, #0f172a);
+    color: white;
+    text-align: center;
+}
+
+/* glowing background effect */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, #00f0ff33, transparent 60%);
+    animation: move 6s infinite alternate;
+}
+@keyframes move {
+    from { transform: translate(-20%, -20%); }
+    to { transform: translate(20%, 20%); }
+}
+
+.container {
+    position: relative;
+    max-width: 400px;
+    margin: auto;
+    padding: 40px 20px;
+    z-index: 1;
+}
+
+/* profile image */
+img {
+    width: 110px;
+    border-radius: 50%;
+    border: 3px solid #00f0ff;
+    box-shadow: 0 0 20px #00f0ff;
+    margin-bottom: 15px;
+}
+
+/* name */
+h2 {
+    font-size: 26px;
+    text-shadow: 0 0 10px #00f0ff;
+}
+
+/* bio */
+p {
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+/* links */
+.link {
+    display: block;
+    background: #020617;
+    border: 2px solid #00f0ff;
+    color: #00f0ff;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 0 10px #00f0ff33;
+}
+
+/* hover effect */
+.link:hover {
+    background: #00f0ff;
+    color: black;
+    box-shadow: 0 0 20px #00f0ff;
+    transform: scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 🔥 ADD YOUR PHOTO HERE -->
+    <img src="https://photos.app.goo.gl/cq7ejcfko5Yqugi26">
+
+    <h2>Mahmoud Ali 🎮</h2>
+    <p>Welcome to my gaming world 👾</p>
+
+    <a class="link" href="https://www.tiktok.com/@mahmoud_ali_s" target="_blank">🎵 TikTok</a>
+    <a class="link" href="https://www.facebook.com/share/1XggwzXXHM/" target="_blank">📘 Facebook</a>
+    <a class="link" href="https://www.instagram.com/70da_as" target="_blank">📸 Instagram</a>
+    <a class="link" href="https://wa.me/201020201472" target="_blank">💬 WhatsApp</a>
+
+</div>
+
+</body>
 </html>
