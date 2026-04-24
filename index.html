@@ -1,161 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mahmoud Ali | Elite Gamer</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: url("https://i.postimg.cc/vZMbHrTt/c0d8541f82efc52aed82c3208e349c93-1.jpg") no-repeat center center/cover;
-    color: white;
-    text-align: center;
-    overflow-x: hidden;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f5f7;
+      color: #111;
+    }header {
+  text-align: center;
+  padding: 50px 20px 20px;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(2, 6, 23, 0.7);
-    z-index: 0;
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
-/* container without blur */
-.container {
-    position: relative;
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 35px 20px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.05); /* semi-transparent but no blur */
-    box-shadow: 0 0 30px #00f0ff22;
-    z-index: 1;
-    animation: fadeIn 1.2s ease;
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 30px;
+  max-width: 1100px;
+  margin: auto;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  cursor: pointer;
 }
 
-/* profile image with white background */
-img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    border-radius: 50%;
-    background: white;
-    padding: 5px;
-    border: 3px solid #00f0ff;  
-    box-shadow: 0 0 25px #00f0ff, 0 0 50px #00f0ff55;
-    margin-bottom: 15px;
-    transition: 0.4s;
-    animation: glow 2s infinite alternate;
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 0 20px rgba(0,150,255,0.2);
 }
 
-img:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 40px #00f0ff;
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
-@keyframes glow {
-    from { box-shadow: 0 0 15px #00f0ff; }
-    to { box-shadow: 0 0 40px #00f0ff; }
+.content {
+  padding: 15px;
 }
 
-h2 {
-    font-size: 28px;
-    margin: 10px 0 5px;
-    letter-spacing: 1px;
-    text-shadow: 0 0 15px #00f0ff;
+.content h3 {
+  margin: 0 0 5px;
+  font-size: 1.2rem;
 }
 
-p {
-    opacity: 0.75;
-    font-size: 14px;
-    margin-bottom: 25px;
+.content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
 }
 
-.divider {
-    width: 60px;
-    height: 3px;
-    margin: 15px auto;
-    background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+/* WhatsApp Button */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.link {
-    display: block;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid #00f0ff55;
-    color: #00f0ff;
-    padding: 14px;
-    margin: 12px 0;
-    border-radius: 14px;
-    text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
 }
 
-.link::before {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, #00f0ff55, transparent);
-    top: 0;
-    left: 0;
-    transition: 0.4s;
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
 }
 
-.link:hover::before {
-    width: 100%;
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 15px;
+  transform: scale(0.8);
+  transition: 0.3s ease;
 }
 
-.link:hover {
-    background: linear-gradient(90deg, #00f0ff, #00c3ff);
-    color: black;
-    box-shadow: 0 0 25px #00f0ff;
-    transform: translateY(-3px) scale(1.03);
+.lightbox.active img {
+  transform: scale(1);
 }
 
-.footer {
-    margin-top: 20px;
-    font-size: 12px;
-    opacity: 0.5;
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
 }
-</style>
+
+  </style>
 </head>
-
-<body>
-
-<div class="container">
-
-    <img src="https://i.postimg.cc/gcXZvWDH/ei-1774400207566-removebg-preview.png">
-
-    <h2>Mahmoud Ali ⚛️</h2>
-    <div class="divider"></div>
-
-    <p>Welcome to my world ✨</p>
-
-    <a class="link" href="https://www.tiktok.com/@mahmoud_ali_s" target="_blank">🎵 TikTok</a>
-    <a class="link" href="https://www.facebook.com/share/1XggwzXXHM/" target="_blank">📘 Facebook</a>
-    <a class="link" href="https://www.instagram.com/70da_as" target="_blank">📸 Instagram</a>
-    <a class="link" href="https://wa.me/201020201472" target="_blank">💬 WhatsApp</a>
-
-    <div class="footer">© 2026 Mahmoud Ali</div>
-
+<body>  <header>
+    <h1>My Work</h1>
+  </header>  <section class="gallery">
+    <div class="card" onclick="openLightbox(this)">
+      <img src="https://via.placeholder.com/400" alt="Work 1">
+      <div class="content">
+        <h3>Project One</h3>
+        <p>Description of your work.</p>
+      </div>
+    </div><div class="card" onclick="openLightbox(this)">
+  <img src="https://via.placeholder.com/400" alt="Work 2">
+  <div class="content">
+    <h3>Project Two</h3>
+    <p>Description of your work.</p>
+  </div>
 </div>
 
-</body>
+<div class="card" onclick="openLightbox(this)">
+  <img src="https://via.placeholder.com/400" alt="Work 3">
+  <div class="content">
+    <h3>Project Three</h3>
+    <p>Description of your work.</p>
+  </div>
+</div>
+
+  </section>  <!-- Lightbox Viewer -->  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="">
+  </div>  <!-- KEEP YOUR ORIGINAL WHATSAPP LINK BELOW --><a class="whatsapp" href="YOUR_WHATSAPP_LINK_HERE" target="_blank">WhatsApp</a>
+
+  <script>
+    function openLightbox(card) {
+      const img = card.querySelector("img").src;
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+
+      lightboxImg.src = img;
+      lightbox.classList.add("active");
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.remove("active");
+    }
+
+    // close when clicking outside image
+    document.getElementById("lightbox").addEventListener("click", function(e) {
+      if (e.target === this) closeLightbox();
+    });
+  </script></body>
 </html>
