@@ -1,134 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #5a0f1a;
-  color: #fff;
-  overflow-x: hidden;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #5a0f1a;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-.bg-triangles { position: fixed; inset: 0; z-index: 0; }
+    .bg-triangles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
 
-.triangle {
-  position: absolute;
-  width: 0; height: 0;
-  border-left: 120px solid transparent;
-  border-right: 120px solid transparent;
-  border-bottom: 200px solid #6b1220;
-  opacity: 0.25;
-}
-.triangle:nth-child(2){left:20%;top:10%;border-bottom-color:#7a1625;}
-.triangle:nth-child(3){left:70%;top:30%;border-bottom-color:#4a0c16;}
-.triangle:nth-child(4){left:40%;top:70%;border-bottom-color:#661320;}
-.triangle:nth-child(5){left:10%;top:60%;border-bottom-color:#3d0a12;}
+    .triangle {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 120px solid transparent;
+      border-right: 120px solid transparent;
+      border-bottom: 200px solid #6b1220;
+      opacity: 0.25;
+    }
 
-header { text-align:center; padding:40px 20px 10px; position:relative; z-index:1; }
+    .triangle:nth-child(2){left:20%;top:10%;border-bottom-color:#7a1625;}
+    .triangle:nth-child(3){left:70%;top:30%;border-bottom-color:#4a0c16;}
+    .triangle:nth-child(4){left:40%;top:70%;border-bottom-color:#661320;}
+    .triangle:nth-child(5){left:10%;top:60%;border-bottom-color:#3d0a12;}
 
-.logo-section { text-align:center; position:relative; z-index:1; }
-.logo-section img {
-  width:180px; height:180px;
-  object-fit:cover;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
+    header {
+      text-align:center;
+      padding:40px 20px 10px;
+      position:relative;
+      z-index:1;
+    }
 
-.whatsapp {
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  margin-top:15px;
-  padding:14px 22px;
-  border-radius:50px;
-  text-decoration:none;
-  font-weight:600;
-  color:white;
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  transition: 0.3s ease;
-}
+    .logo-section {
+      text-align:center;
+      position:relative;
+      z-index:1;
+    }
 
-.whatsapp:hover {
-  transform: scale(1.05);
-}
+    .logo-section img {
+      width:180px;
+      height:180px;
+      object-fit:cover;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    }
 
-.gallery {
-  display:flex;
-  gap:20px;
-  padding:40px 20px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  position:relative;
-  z-index:1;
-}
+    .whatsapp {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:15px;
+      padding:14px 22px;
+      border-radius:50px;
+      text-decoration:none;
+      font-weight:600;
+      color:white;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
 
-.card {
-  min-width:260px;
-  height:300px;
-  background:rgba(255,255,255,0.05);
-  border-radius:20px;
-  overflow:hidden;
-  transition:0.4s ease;
-  scroll-snap-align:center;
-  transform:scale(0.85);
-  opacity:0.6;
-  display:flex;
-  flex-direction:column;
-}
+    .whatsapp::before {
+      content: "";
+      position: absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background: rgba(255,255,255,0.2);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
 
-.card.active {
-  transform:scale(1.15);
-  opacity:1;
-  box-shadow:0 10px 40px rgba(0,0,0,0.6);
-}
+    .whatsapp:hover::before {
+      left:120%;
+    }
 
-.img-box {
-  width:100%;
-  height:75%;
-  overflow:hidden;
-}
+    .whatsapp:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(37,211,102,0.5);
+    }
 
-.img-box img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
+    .gallery {
+      display:flex;
+      gap:20px;
+      padding:40px 20px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      position:relative;
+      z-index:1;
+    }
 
-.content {
-  height:25%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    .card {
+      min-width:260px;
+      background:rgba(255,255,255,0.05);
+      border-radius:20px;
+      overflow:hidden;
+      transition:0.4s ease;
+      scroll-snap-align:center;
+      transform:scale(0.85);
+      opacity:0.6;
+    }
 
-.lightbox {
-  position:fixed; inset:0;
-  background:rgba(0,0,0,0.85);
-  display:flex; align-items:center; justify-content:center;
-  opacity:0; visibility:hidden;
-  transition:0.3s;
-  z-index:10;
-}
+    .card.active {
+      transform:scale(1.15);
+      opacity:1;
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
+    }
 
-.lightbox.active { opacity:1; visibility:visible; }
+    .card img {
+      width:100%;
+      height:200px;
+      object-fit:cover;
+    }
 
-.lightbox img {
-  max-width:90%; max-height:90%;
-  border-radius:15px;
-}
+    .content {
+      padding:15px;
+    }
 
-.close {
-  position:absolute; top:20px; right:30px;
-  font-size:2rem; cursor:pointer;
-}
-</style>
+    .content h3 {
+      margin: 8px 0 5px;
+      font-size: 18px;
+    }
+
+    .content p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .lightbox {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.85);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      visibility:hidden;
+      transition:0.3s;
+      z-index:10;
+    }
+
+    .lightbox.active {
+      opacity:1;
+      visibility:visible;
+    }
+
+    .lightbox img {
+      max-width:90%;
+      max-height:90%;
+      border-radius:15px;
+      transform:scale(0.8);
+      transition:0.3s;
+    }
+
+    .lightbox.active img {
+      transform:scale(1);
+    }
+
+    .close {
+      position:absolute;
+      top:20px;
+      right:30px;
+      font-size:2rem;
+      cursor:pointer;
+    }
+  </style>
 </head>
 
 <body>
@@ -146,26 +198,65 @@ header { text-align:center; padding:40px 20px 10px; position:relative; z-index:1
 </header>
 
 <div class="logo-section">
-  <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+  <img src="https://via.placeholder.com/300">
   <br>
-  <a class="whatsapp" href="https://wa.me/"201007086898 target="_blank">
-    💬 WhatsApp
+  <a class="whatsapp" href="https://wa.me/201007086898" target="_blank">
+    <span>💬</span> WhatsApp
   </a>
 </div>
 
 <section class="gallery" id="gallery">
 
-  <!-- 10 images -->
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>1</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>2</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>3</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>4</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>5</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>6</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>7</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>8</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>9</h3></div></div>
-  <div class="card" onclick="openLightbox(this)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content"><h3>10</h3></div></div>
+  <!-- 10 CARDS -->
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>1</h3><p>Modern geometric design study with strong contrast.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>2</h3><p>Minimal concept exploration with abstract shapes.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>3</h3><p>Experimental layout focusing on balance and spacing.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>4</h3><p>Color composition test with warm tones.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>5</h3><p>Typography and structure alignment practice.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>6</h3><p>Shadow and depth visual experiment.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>7</h3><p>UI-inspired card layout study.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>8</h3><p>Creative shape blending composition.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>9</h3><p>High contrast visual identity test.</p></div>
+  </div>
+
+  <div class="card" onclick="openLightbox(this)">
+    <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+    <div class="content"><h3>10</h3><p>Final portfolio showcase design concept.</p></div>
+  </div>
 
 </section>
 
@@ -175,36 +266,35 @@ header { text-align:center; padding:40px 20px 10px; position:relative; z-index:1
 </div>
 
 <script>
-const gallery = document.getElementById('gallery');
-const cards = document.querySelectorAll('.card');
+  const gallery = document.getElementById('gallery');
+  const cards = document.querySelectorAll('.card');
 
-function updateCenterCard() {
-  let center = window.innerWidth / 2;
-  cards.forEach(card => {
-    let rect = card.getBoundingClientRect();
-    let cardCenter = rect.left + rect.width / 2;
-    let distance = Math.abs(center - cardCenter);
-    if (distance < 150) card.classList.add('active');
-    else card.classList.remove('active');
+  function updateCenterCard() {
+    let center = window.innerWidth / 2;
+    cards.forEach(card => {
+      let rect = card.getBoundingClientRect();
+      let cardCenter = rect.left + rect.width / 2;
+      let distance = Math.abs(center - cardCenter);
+      if (distance < 150) card.classList.add('active');
+      else card.classList.remove('active');
+    });
+  }
+
+  gallery.addEventListener('scroll', updateCenterCard);
+  window.addEventListener('load', updateCenterCard);
+
+  function openLightbox(card) {
+    document.getElementById('lightbox-img').src = card.querySelector('img').src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
   });
-}
-
-gallery.addEventListener('scroll', updateCenterCard);
-window.addEventListener('load', updateCenterCard);
-
-function openLightbox(card) {
-  document.getElementById('lightbox-img').src =
-    card.querySelector('img').src;
-  document.getElementById('lightbox').classList.add('active');
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-}
-
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLightbox();
-});
 </script>
 
 </body>
