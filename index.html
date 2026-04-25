@@ -143,17 +143,19 @@
       line-height: 1.4;
     }
 
+    /* ===== LIGHTBOX (ANIMATED ZOOM) ===== */
     .lightbox {
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,0.85);
+      background:rgba(0,0,0,0.9);
       display:flex;
       align-items:center;
       justify-content:center;
       opacity:0;
       visibility:hidden;
-      transition:0.3s;
+      transition:0.25s ease;
       z-index:10;
+      backdrop-filter: blur(8px);
     }
 
     .lightbox.active {
@@ -165,12 +167,15 @@
       max-width:90%;
       max-height:90%;
       border-radius:15px;
-      transform:scale(0.8);
-      transition:0.3s;
+      transform: scale(0.6);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  opacity 0.25s ease;
     }
 
     .lightbox.active img {
-      transform:scale(1);
+      transform: scale(1);
+      opacity: 1;
     }
 
     .close {
@@ -179,6 +184,7 @@
       right:30px;
       font-size:2rem;
       cursor:pointer;
+      z-index: 11;
     }
   </style>
 </head>
@@ -284,12 +290,32 @@
   window.addEventListener('load', updateCenterCard);
 
   function openLightbox(card) {
-    document.getElementById('lightbox-img').src = card.querySelector('img').src;
-    document.getElementById('lightbox').classList.add('active');
+    const img = document.getElementById('lightbox-img');
+    const lightbox = document.getElementById('lightbox');
+
+    img.src = card.querySelector('img').src;
+
+    img.style.transform = "scale(0.6)";
+    img.style.opacity = "0";
+
+    lightbox.classList.add('active');
+
+    void img.offsetWidth;
+
+    img.style.transform = "scale(1)";
+    img.style.opacity = "1";
   }
 
   function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
+    const img = document.getElementById('lightbox-img');
+    const lightbox = document.getElementById('lightbox');
+
+    img.style.transform = "scale(0.6)";
+    img.style.opacity = "0";
+
+    setTimeout(() => {
+      lightbox.classList.remove('active');
+    }, 200);
   }
 
   document.getElementById('lightbox').addEventListener('click', function(e) {
