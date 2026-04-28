@@ -11,139 +11,153 @@ body {
   font-family: Arial, sans-serif;
   background: #5a0f1a;
   color: white;
+  overflow-x: hidden;
 }
 
-header {
-  text-align: center;
-  padding: 30px;
+/* LOGO */
+.logo {
+  display:flex;
+  justify-content:center;
+  padding:20px;
 }
 
-/* GRID */
+.logo img {
+  width:120px;
+  height:120px;
+  border-radius:20px;
+}
+
+/* HORIZONTAL FOLDERS */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  display:flex;
+  gap:20px;
+  padding:40px 20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
 }
 
 /* CARD */
 .card {
-  height: 250px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: 0.3s;
+  min-width:250px;
+  height:280px;
+  border-radius:20px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.05);
+  transition:0.4s;
+  scroll-snap-align:center;
+  transform:scale(0.8);
+  filter:blur(2px);
 }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+/* CENTER FOCUS */
+.card.active {
+  transform:scale(1.2);
+  filter:blur(0);
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
 }
 
-.img-box {
-  height: 75%;
-}
-
+/* IMAGE */
 .img-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width:100%;
+  height:80%;
+  object-fit:cover;
 }
 
 .content {
-  height: 25%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align:center;
+  padding:10px;
 }
 
 /* VIEWER */
 .viewer {
-  position: fixed;
-  inset: 0;
-  background: #5a0f1a;
-  display: none;
-  flex-direction: column;
+  position:fixed;
+  inset:0;
+  background:#5a0f1a;
+  display:none;
+  flex-direction:column;
 }
 
 .viewer.active {
-  display: flex;
+  display:flex;
 }
 
-.viewer-header {
-  padding: 15px;
-  cursor: pointer;
-}
-
-/* INSIDE FOLDER */
+/* INSIDE FOLDER (VERTICAL STACK) */
 .viewer-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 10px;
-  padding: 20px;
-  overflow: auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+  padding:20px;
+  overflow-y:auto;
 }
 
-.viewer-gallery img {
-  width: 100%;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+/* IMAGE STACK STYLE */
+.viewer-card {
+  width:80%;
+  border-radius:20px;
+  overflow:hidden;
+  transition:0.4s;
+  transform:scale(0.8);
+  filter:blur(2px);
 }
 
-.viewer-gallery img:hover {
-  transform: scale(1.05);
+.viewer-card.active {
+  transform:scale(1.1);
+  filter:blur(0);
 }
 
-/* FULLSCREEN IMAGE */
+.viewer-card img {
+  width:100%;
+}
+
+/* FULLSCREEN */
 .fullscreen {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 20;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
 }
 
 .fullscreen.active {
-  display: flex;
+  display:flex;
 }
 
 .fullscreen img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 15px;
+  max-width:90%;
+  max-height:90%;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>My Work</h1>
-</header>
+<!-- LOGO -->
+<div class="logo">
+  <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
+</div>
 
-<section class="gallery">
+<!-- FOLDERS -->
+<section class="gallery" id="gallery">
 
-<!-- 10 FOLDERS -->
-<div class="card" onclick="openFolder(folder1)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 1</div></div>
-<div class="card" onclick="openFolder(folder2)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 2</div></div>
-<div class="card" onclick="openFolder(folder3)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 3</div></div>
-<div class="card" onclick="openFolder(folder4)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 4</div></div>
-<div class="card" onclick="openFolder(folder5)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 5</div></div>
-<div class="card" onclick="openFolder(folder6)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 6</div></div>
-<div class="card" onclick="openFolder(folder7)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 7</div></div>
-<div class="card" onclick="openFolder(folder8)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 8</div></div>
-<div class="card" onclick="openFolder(folder9)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 9</div></div>
-<div class="card" onclick="openFolder(folder10)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">Project 10</div></div>
+  <!-- repeat 10 -->
+  <div class="card" onclick="openFolder(folder1)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">1</div></div>
+  <div class="card" onclick="openFolder(folder2)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">2</div></div>
+  <div class="card" onclick="openFolder(folder3)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">3</div></div>
+  <div class="card" onclick="openFolder(folder4)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">4</div></div>
+  <div class="card" onclick="openFolder(folder5)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">5</div></div>
+  <div class="card" onclick="openFolder(folder6)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">6</div></div>
+  <div class="card" onclick="openFolder(folder7)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">7</div></div>
+  <div class="card" onclick="openFolder(folder8)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">8</div></div>
+  <div class="card" onclick="openFolder(folder9)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">9</div></div>
+  <div class="card" onclick="openFolder(folder10)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">10</div></div>
 
 </section>
 
 <!-- VIEWER -->
 <div class="viewer" id="viewer">
-  <div class="viewer-header" onclick="closeFolder()">⬅ Back</div>
+  <div onclick="closeFolder()">⬅ Back</div>
   <div class="viewer-gallery" id="viewerGallery"></div>
 </div>
 
@@ -155,7 +169,6 @@ header {
 <script>
 const img = "https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg";
 
-/* 10 folders × 10 images = 100 images */
 const folder1 = [img,img,img,img,img,img,img,img,img,img];
 const folder2 = [img,img,img,img,img,img,img,img,img,img];
 const folder3 = [img,img,img,img,img,img,img,img,img,img];
@@ -167,7 +180,27 @@ const folder8 = [img,img,img,img,img,img,img,img,img,img];
 const folder9 = [img,img,img,img,img,img,img,img,img,img];
 const folder10 = [img,img,img,img,img,img,img,img,img,img];
 
-/* OPEN FOLDER */
+/* center focus folders */
+const cards = document.querySelectorAll(".card");
+const gallery = document.getElementById("gallery");
+
+function updateCenter() {
+  const center = window.innerWidth / 2;
+
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const cardCenter = rect.left + rect.width / 2;
+    const dist = Math.abs(center - cardCenter);
+
+    if (dist < 150) card.classList.add("active");
+    else card.classList.remove("active");
+  });
+}
+
+gallery.addEventListener("scroll", updateCenter);
+window.addEventListener("load", updateCenter);
+
+/* open folder */
 function openFolder(folder) {
   const viewer = document.getElementById("viewer");
   const gallery = document.getElementById("viewerGallery");
@@ -175,18 +208,40 @@ function openFolder(folder) {
   gallery.innerHTML = "";
 
   folder.forEach(img => {
-    gallery.innerHTML += `<img src="${img}" onclick="openFullscreen('${img}')">`;
+    gallery.innerHTML += `
+      <div class="viewer-card" onclick="openFullscreen('${img}')">
+        <img src="${img}">
+      </div>
+    `;
   });
 
   viewer.classList.add("active");
+
+  setTimeout(updateViewerCenter, 100);
 }
 
-/* CLOSE FOLDER */
+/* viewer focus */
+function updateViewerCenter() {
+  const cards = document.querySelectorAll(".viewer-card");
+  const center = window.innerHeight / 2;
+
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const c = rect.top + rect.height / 2;
+    const dist = Math.abs(center - c);
+
+    if (dist < 150) card.classList.add("active");
+    else card.classList.remove("active");
+  });
+}
+
+document.getElementById("viewerGallery").addEventListener("scroll", updateViewerCenter);
+
 function closeFolder() {
   document.getElementById("viewer").classList.remove("active");
 }
 
-/* FULLSCREEN */
+/* fullscreen */
 function openFullscreen(src) {
   document.getElementById("fullscreenImg").src = src;
   document.getElementById("fullscreen").classList.add("active");
