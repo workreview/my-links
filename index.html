@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,55 +8,91 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #5a0f1a;
   color: white;
   overflow-x: hidden;
 }
 
+/* ===== TRIANGLE BACKGROUND (RESTORED) ===== */
+.bg-triangles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+  border-bottom: 200px solid #6b1220;
+  opacity: 0.25;
+}
+
+.triangle:nth-child(2){left:20%;top:10%;border-bottom-color:#7a1625;}
+.triangle:nth-child(3){left:70%;top:30%;border-bottom-color:#4a0c16;}
+.triangle:nth-child(4){left:40%;top:70%;border-bottom-color:#661320;}
+.triangle:nth-child(5){left:10%;top:60%;border-bottom-color:#3d0a12;}
+
 /* LOGO */
 .logo {
   display:flex;
   justify-content:center;
-  padding:20px;
+  padding-top:20px;
+  position:relative;
+  z-index:1;
 }
 
 .logo img {
-  width:120px;
-  height:120px;
+  width:180px;
+  height:180px;
   border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* HORIZONTAL FOLDERS */
+/* WHATSAPP */
+.whatsapp {
+  display:inline-flex;
+  margin-top:15px;
+  padding:14px 22px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:600;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color:white;
+}
+
+/* ===== FOLDER LAYOUT (RESTORED STYLE) ===== */
 .gallery {
   display:flex;
   gap:20px;
   padding:40px 20px;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
+  position:relative;
+  z-index:1;
 }
 
-/* CARD */
 .card {
   min-width:250px;
   height:280px;
   border-radius:20px;
   overflow:hidden;
   background:rgba(255,255,255,0.05);
-  transition:0.4s;
+  transition:0.4s ease;
   scroll-snap-align:center;
   transform:scale(0.8);
   filter:blur(2px);
 }
 
-/* CENTER FOCUS */
 .card.active {
   transform:scale(1.2);
   filter:blur(0);
   box-shadow:0 10px 40px rgba(0,0,0,0.6);
 }
 
-/* IMAGE */
 .img-box img {
   width:100%;
   height:80%;
@@ -75,35 +111,26 @@ body {
   background:#5a0f1a;
   display:none;
   flex-direction:column;
+  z-index:10;
 }
 
 .viewer.active {
   display:flex;
 }
 
-/* INSIDE FOLDER (VERTICAL STACK) */
 .viewer-gallery {
   display:flex;
   flex-direction:column;
-  align-items:center;
   gap:20px;
   padding:20px;
   overflow-y:auto;
 }
 
-/* IMAGE STACK STYLE */
 .viewer-card {
   width:80%;
+  margin:auto;
   border-radius:20px;
   overflow:hidden;
-  transition:0.4s;
-  transform:scale(0.8);
-  filter:blur(2px);
-}
-
-.viewer-card.active {
-  transform:scale(1.1);
-  filter:blur(0);
 }
 
 .viewer-card img {
@@ -118,6 +145,7 @@ body {
   display:none;
   align-items:center;
   justify-content:center;
+  z-index:20;
 }
 
 .fullscreen.active {
@@ -133,31 +161,43 @@ body {
 
 <body>
 
+<!-- BACKGROUND -->
+<div class="bg-triangles">
+  <div class="triangle"></div>
+  <div class="triangle"></div>
+  <div class="triangle"></div>
+  <div class="triangle"></div>
+  <div class="triangle"></div>
+</div>
+
 <!-- LOGO -->
 <div class="logo">
   <img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg">
 </div>
 
+<div style="text-align:center; position:relative; z-index:1;">
+  <a class="whatsapp" href="https://wa.me/201007086898">WhatsApp</a>
+</div>
+
 <!-- FOLDERS -->
 <section class="gallery" id="gallery">
 
-  <!-- repeat 10 -->
-  <div class="card" onclick="openFolder(folder1)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">1</div></div>
-  <div class="card" onclick="openFolder(folder2)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">2</div></div>
-  <div class="card" onclick="openFolder(folder3)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">3</div></div>
-  <div class="card" onclick="openFolder(folder4)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">4</div></div>
-  <div class="card" onclick="openFolder(folder5)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">5</div></div>
-  <div class="card" onclick="openFolder(folder6)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">6</div></div>
-  <div class="card" onclick="openFolder(folder7)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">7</div></div>
-  <div class="card" onclick="openFolder(folder8)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">8</div></div>
-  <div class="card" onclick="openFolder(folder9)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">9</div></div>
-  <div class="card" onclick="openFolder(folder10)"><div class="img-box"><img src="https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg"></div><div class="content">10</div></div>
+  <div class="card" onclick="openFolder(folder1)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">1</div></div>
+  <div class="card" onclick="openFolder(folder2)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">2</div></div>
+  <div class="card" onclick="openFolder(folder3)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">3</div></div>
+  <div class="card" onclick="openFolder(folder4)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">4</div></div>
+  <div class="card" onclick="openFolder(folder5)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">5</div></div>
+  <div class="card" onclick="openFolder(folder6)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">6</div></div>
+  <div class="card" onclick="openFolder(folder7)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">7</div></div>
+  <div class="card" onclick="openFolder(folder8)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">8</div></div>
+  <div class="card" onclick="openFolder(folder9)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">9</div></div>
+  <div class="card" onclick="openFolder(folder10)"><div class="img-box"><img src="https://via.placeholder.com/400"></div><div class="content">10</div></div>
 
 </section>
 
 <!-- VIEWER -->
 <div class="viewer" id="viewer">
-  <div onclick="closeFolder()">⬅ Back</div>
+  <div onclick="closeFolder()" style="padding:15px;cursor:pointer;">⬅ Back</div>
   <div class="viewer-gallery" id="viewerGallery"></div>
 </div>
 
@@ -167,8 +207,10 @@ body {
 </div>
 
 <script>
-const img = "https://i.postimg.cc/rwFrR63Q/b4322f0401cc60b14e15340ebf387422.jpg";
 
+const img = "https://via.placeholder.com/800";
+
+/* YOUR EXACT STRUCTURE (kept) */
 const folder1 = [img,img,img,img,img,img,img,img,img,img];
 const folder2 = [img,img,img,img,img,img,img,img,img,img];
 const folder3 = [img,img,img,img,img,img,img,img,img,img];
@@ -180,7 +222,7 @@ const folder8 = [img,img,img,img,img,img,img,img,img,img];
 const folder9 = [img,img,img,img,img,img,img,img,img,img];
 const folder10 = [img,img,img,img,img,img,img,img,img,img];
 
-/* center focus folders */
+/* CENTER EFFECT (restored behavior) */
 const cards = document.querySelectorAll(".card");
 const gallery = document.getElementById("gallery");
 
@@ -200,15 +242,15 @@ function updateCenter() {
 gallery.addEventListener("scroll", updateCenter);
 window.addEventListener("load", updateCenter);
 
-/* open folder */
+/* OPEN */
 function openFolder(folder) {
   const viewer = document.getElementById("viewer");
-  const gallery = document.getElementById("viewerGallery");
+  const g = document.getElementById("viewerGallery");
 
-  gallery.innerHTML = "";
+  g.innerHTML = "";
 
   folder.forEach(img => {
-    gallery.innerHTML += `
+    g.innerHTML += `
       <div class="viewer-card" onclick="openFullscreen('${img}')">
         <img src="${img}">
       </div>
@@ -216,32 +258,14 @@ function openFolder(folder) {
   });
 
   viewer.classList.add("active");
-
-  setTimeout(updateViewerCenter, 100);
 }
 
-/* viewer focus */
-function updateViewerCenter() {
-  const cards = document.querySelectorAll(".viewer-card");
-  const center = window.innerHeight / 2;
-
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    const c = rect.top + rect.height / 2;
-    const dist = Math.abs(center - c);
-
-    if (dist < 150) card.classList.add("active");
-    else card.classList.remove("active");
-  });
-}
-
-document.getElementById("viewerGallery").addEventListener("scroll", updateViewerCenter);
-
+/* CLOSE */
 function closeFolder() {
   document.getElementById("viewer").classList.remove("active");
 }
 
-/* fullscreen */
+/* FULLSCREEN */
 function openFullscreen(src) {
   document.getElementById("fullscreenImg").src = src;
   document.getElementById("fullscreen").classList.add("active");
@@ -250,6 +274,7 @@ function openFullscreen(src) {
 function closeFullscreen() {
   document.getElementById("fullscreen").classList.remove("active");
 }
+
 </script>
 
 </body>
